@@ -6,7 +6,7 @@
   "scripts": {
     "cypress:open": "cypress open"
   },
-  "author": "",
+  "author": "Santiago Agost",
   "license": "MIT",
   "devDependencies": {
     "cypress": "^13.6.2"
