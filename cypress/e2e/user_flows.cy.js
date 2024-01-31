@@ -49,12 +49,12 @@ describe("User flows", () => {
     // Address
     address.addNameType(tests.name);
     address.addLastType(tests.lastname);
-    address.addAddressType("La calle 123");
-    address.addCountryType("Canada");
-    address.addStateType("Cba");
-    address.addCityType("Cordoba");
-    address.addZipType("5000");
-    address.addMobileType("123456789");
+    address.addAddressType(tests.adress);
+    address.addCountryType(tests.country);
+    address.addStateType(tests.state);
+    address.addCityType(tests.city);
+    address.addZipType(tests.zip);
+    address.addMobileType(tests.mobile);
     address.btnCreateAccountClick();
 
     // Account creation
@@ -69,9 +69,9 @@ describe("User flows", () => {
     // Payment
     payment.cardNameType(tests.fullname);
     payment.cardNumberType(tests.creditcarnumber);
-    payment.cardCVCType("123");
-    payment.cardMonthType("02");
-    payment.cardYearType("2026");
+    payment.cardCVCType(tests.cardCVCT);
+    payment.cardMonthType(tests.cardMonth);
+    payment.cardYearType(tests.cardYear);
     payment.btnCardClick();
     // Order confirmation
     orderConfirmation.elements
@@ -83,18 +83,18 @@ describe("User flows", () => {
     homePage.btnLogoutHeaderClick();
     // Account creation - sign in
     accountCreationSingIn.loginEmailType(uniqueEmail);
-    accountCreationSingIn.loginPasswordType("123456");
+    accountCreationSingIn.loginPasswordType(tests.password);
     accountCreationSingIn.btnLoginClick();
     // Home screen - Contact Us
     homePage.btnContactusHeaderClick();
     // Contact form
-    contactus.contactNameType("Santiago A");
+    contactus.contactNameType(tests.fullname);
     contactus.contactEmailType(uniqueEmail);
-    contactus.contactsubjectType("Test");
-    contactus.contactMessageType("Test Test");
+    contactus.contactsubjectType(tests.contactsubject);
+    contactus.contactMessageType(tests.contactsubject);
     contactus.btnSubmitClick();
     cy.on("window:confirm", (str) => {
-      expect(str).to.equal("Press OK to proceed!");
+      expect(str).to.equal(tests.windowConfirm);
     });
     // Home screen -  “Logout” on top header
     homePage.btnLogoutHeaderClick();

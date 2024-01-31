@@ -7,5 +7,17 @@
   "months": "October",
   "year": "1990",
   "creditcarnumber": "5555 5555 5555 5555",
-  "correctOrder": "Order Placed!"
+  "correctOrder": "Order Placed!",
+  "windowConfirm":"Press OK to proceed!",
+  "adress":"La calle 123",
+  "country":"Canada",
+  "state":"cba",
+  "city":"Cordoba",
+  "zip":"5000",
+  "mobile":"123456789",
+  "cardCVCT":"123",
+  "cardMonth":"10",
+  "cardYear":"2026",
+  "contactsubject":"Test",
+  "contactMessage":"Test Test Test"
 }
