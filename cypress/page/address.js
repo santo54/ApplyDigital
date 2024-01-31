@@ -47,19 +47,3 @@ class address {
 }
 
 module.exports = new address();
-
-/*
-elements = {
-   addName: () => cy.get('[data-qa="first_name"]').type("Santiago");
-   addLast: () => cy.get('[data-qa="last_name"]').type("A");
-   addAddress: () => cy.get('[data-qa="address"]').type("La calle 1234");
-   addCountry: () => cy.get('[data-qa="country"]').select("Canada");
-   addState: () => cy.get('[data-qa="state"]').type("Cordoba");
-   addCity: () => cy.get('[data-qa="city"]').type("Cordoba");
-   addZip: () => cy.get('[data-qa="zipcode"]').type("5000");
-   addMobile: () => cy.get('[data-qa="mobile_number"]').type("1234567890");
-   btnCreateAccount: () => cy.get('[data-qa="create-account"]').click();
-};
-
-
-*/

@@ -1,10 +1,11 @@
 {
-  "name": "ApplyDigital",
+  "name": "applydigital",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "runOnChrome": "cypress run --browser chrome"
   },
   "author": "Santiago Agost",
   "license": "MIT",
