@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-01-31T21:51:42.543Z",
+    "end": "2024-01-31T21:52:35.973Z",
+    "duration": 53430,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "369766ee-61c7-48e8-aab9-7741ca272de0",
+      "title": "",
+      "fullFile": "cypress\\e2e\\user_flows.cy.js",
+      "file": "cypress\\e2e\\user_flows.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "16109d47-f2bf-461f-ad32-d606f44e5b49",
+          "title": "User flows",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "tc001",
+              "fullTitle": "User flows tc001",
+              "timedOut": null,
+              "duration": 50659,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Home screen ->  Enter the website /  Choose a product and click on “View product”\ncy.window().then(win => {\n  win.scrollTo(0, win.innerHeight / 2);\n});\n_homePage.default.productClick();\n// Product details - Quantity 30 / add cart\n_productDetails.default.elements.quantityBox().clear().type(\"30\");\n_productDetails.default.btnAddCardClick();\n_productDetails.default.btnWinAddedClick();\n//  Cart & cart summary - Proceed to Checkout\n_cartCartSummary.default.btnProceedCheckoutClick();\n_cartCartSummary.default.btnWinRegisterLogClick();\n// Account creation & sign in\n_accountCreationSingIn.default.signupNameType(tests.name);\n_accountCreationSingIn.default.elements.signupEmail().type(uniqueEmail);\n_accountCreationSingIn.default.btnSignupClick();\n_accountCreationSingIn.default.btnIdGenderSelect();\n_accountCreationSingIn.default.signuPasswordType(tests.password);\n_accountCreationSingIn.default.signupDaysType(tests.days);\n_accountCreationSingIn.default.signupMonthsType(tests.months);\n_accountCreationSingIn.default.signupYearsType(tests.year);\n// Address\n_address.default.addNameType(tests.name);\n_address.default.addLastType(tests.lastname);\n_address.default.addAddressType(tests.adress);\n_address.default.addCountryType(tests.country);\n_address.default.addStateType(tests.state);\n_address.default.addCityType(tests.city);\n_address.default.addZipType(tests.zip);\n_address.default.addMobileType(tests.mobile);\n_address.default.btnCreateAccountClick();\n// Account creation\n_accountCreationSingIn.default.elements.accountCreated().should(\"have.text\", tests.accountCreated);\n_accountCreationSingIn.default.btnContinueClick();\n// Home screen - Cart in the header\n_homePage.default.btnCartHeaderClick();\n//  Cart & cart summary\n_cartCartSummary.default.btnProceedCheckoutClick();\n_cartCartSummary.default.btnPlaceOrderClick();\n// Payment\n_payment.default.cardNameType(tests.fullname);\n_payment.default.cardNumberType(tests.creditcarnumber);\n_payment.default.cardCVCType(tests.cardCVCT);\n_payment.default.cardMonthType(tests.cardMonth);\n_payment.default.cardYearType(tests.cardYear);\n_payment.default.btnCardClick();\n// Order confirmation\n_orderConfirmation.default.elements.orderPlaced().should(\"contain\", tests.correctOrder);\n_orderConfirmation.default.btnContinueClick();\n// Home screen -  “Logout” on top header\n_homePage.default.btnLogoutHeaderClick();\n// Account creation - sign in\n_accountCreationSingIn.default.loginEmailType(uniqueEmail);\n_accountCreationSingIn.default.loginPasswordType(tests.password);\n_accountCreationSingIn.default.btnLoginClick();\n// Home screen - Contact Us\n_homePage.default.btnContactusHeaderClick();\n// Contact form\n_contactus.default.contactNameType(tests.fullname);\n_contactus.default.contactEmailType(uniqueEmail);\n_contactus.default.contactsubjectType(tests.contactsubject);\n_contactus.default.contactMessageType(tests.contactMessage);\n_contactus.default.btnSubmitClick();\ncy.on(\"window:confirm\", str => {\n  expect(str).to.equal(tests.windowConfirm);\n});\n// Home screen -  “Logout” on top header\n_homePage.default.btnLogoutHeaderClick();",
+              "err": {},
+              "uuid": "63641b57-2e54-4c93-9d77-b2811cc0771f",
+              "parentUUID": "16109d47-f2bf-461f-ad32-d606f44e5b49",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "63641b57-2e54-4c93-9d77-b2811cc0771f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 50659,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
