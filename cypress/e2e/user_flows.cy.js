@@ -58,6 +58,7 @@ describe("User flows", () => {
     address.btnCreateAccountClick();
 
     // Account creation
+    accountCreationSingIn.elements.accountCreated().should("have.text" , tests.accountCreated)
     accountCreationSingIn.btnContinueClick();
 
     // Home screen - Cart in the header
@@ -91,7 +92,7 @@ describe("User flows", () => {
     contactus.contactNameType(tests.fullname);
     contactus.contactEmailType(uniqueEmail);
     contactus.contactsubjectType(tests.contactsubject);
-    contactus.contactMessageType(tests.contactsubject);
+    contactus.contactMessageType(tests.contactMessage);
     contactus.btnSubmitClick();
     cy.on("window:confirm", (str) => {
       expect(str).to.equal(tests.windowConfirm);

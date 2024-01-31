@@ -11,6 +11,7 @@ class accountCreationSingIn {
     loginEmail: () => cy.get('[data-qa="login-email"]'),
     loginPassword: () => cy.get('[data-qa="login-password"]'),
     btnLogin: () => cy.get('[data-qa="login-button"]'),
+    accountCreated: () => cy.get('[data-qa="account-created"]'),
     btnContinue: () => cy.get('[data-qa="continue-button"]'),
   };
   signupNameType(name) {
