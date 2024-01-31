@@ -1,0 +1,11 @@
+{
+  "name": "Santiago",
+  "lastname": "A",
+  "fullname": "Santiago A.",
+  "password": "123456",
+  "days": "9",
+  "months": "October",
+  "year": "1990",
+  "creditcarnumber": "5555 5555 5555 5555",
+  "correctOrder": "Order Placed!"
+}

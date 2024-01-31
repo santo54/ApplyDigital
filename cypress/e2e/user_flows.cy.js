@@ -1,7 +1,18 @@
+import homePage from "../page/homePage";
+import accountCreationSingIn from "../page/accountCreationSingIn";
+import address from "../page/address";
+import payment from "../page/payment";
+import contactus from "../page/contactus";
+import cartCartSummary from "../page/cartCartSummary";
+import orderConfirmation from "../page/orderConfirmation";
+import productDetails from "../page/productDetails";
+
+const tests = require("../page/data.json");
+
 function generateUniqueEmail() {
   const fixedPart = "test";
   const timestamp = new Date().getTime();
-  const dynamicPart = `_${timestamp}@example.com`;
+  const dynamicPart = `_${timestamp}@email.com`;
 
   return fixedPart + dynamicPart;
 }
@@ -13,57 +24,79 @@ describe("User flows", () => {
     cy.visit("https://automationexercise.com/");
   });
 
-  it("Enter the website and scroll down about halfway down the page.", () => {
+  it("tc001", () => {
+    // Home screen ->  Enter the website /  Choose a product and click on “View product”
     cy.window().then((win) => {
       win.scrollTo(0, win.innerHeight / 2);
     });
-    cy.get(":nth-child(10) .product-image-wrapper .choose .nav li a").click();
-    cy.get("#quantity").clear().type("30");
-    cy.get(":nth-child(5) > .btn").click();
-    cy.get("u").click();
-    cy.get(".col-sm-6 > .btn").click();
-    cy.get(".modal-body > :nth-child(2) > a > u").click();
-    cy.get('[data-qa="signup-name"]').type("Santiago");
-    cy.get('[data-qa="signup-email"]').type(uniqueEmail);
-    cy.get('[data-qa="signup-button"]').click();
-    cy.get("#id_gender1").click();
-    cy.get('[data-qa="password"]').type("123456");
-    cy.get('[data-qa="days"]').select("9");
-    cy.get('[data-qa="months"]').select("10");
-    cy.get('[data-qa="years"]').select("1990");
-    cy.get('[data-qa="first_name"]').type("Santiago");
-    cy.get('[data-qa="last_name"]').type("A");
-    cy.get('[data-qa="address"]').type("La calle 1234");
-    cy.get('[data-qa="country"]').select("Canada");
-    cy.get('[data-qa="state"]').type("Cordoba");
-    cy.get('[data-qa="city"]').type("Cordoba");
-    cy.get('[data-qa="zipcode"]').type("5000");
-    cy.get('[data-qa="mobile_number"]').type("1234567890");
-    cy.get('[data-qa="create-account"]').click();
-    cy.get('[data-qa="continue-button"]').click();
-    cy.get(".shop-menu > .nav > :nth-child(3) > a").click();
-    cy.get(".col-sm-6 > .btn").click();
-    cy.get(":nth-child(7) > .btn").click();
-    cy.get('[data-qa="name-on-card"]').type("Santiago A");
-    cy.get('[data-qa="card-number"]').type("5555 5555 5555 5555");
-    cy.get('[data-qa="cvc"]').type("123");
-    cy.get('[data-qa="expiry-month"]').type("02");
-    cy.get('[data-qa="expiry-year"]').type("2026");
-    cy.get('[data-qa="pay-button"]').click();
-    cy.get('[data-qa="continue-button"]').click();
-    cy.get(".shop-menu > .nav > :nth-child(4) > a").click();
-    cy.get('[data-qa="login-email"]').type(uniqueEmail);
-    cy.get('[data-qa="login-password"]').type("123456");
-    cy.get('[data-qa="login-button"]').click();
-    cy.get(":nth-child(9) > a").click();
-    cy.get('[data-qa="name"]').type("Santiago A");
-    cy.get('[data-qa="email"]').type(uniqueEmail);
-    cy.get('[data-qa="subject"]').type("Test");
-    cy.get('[data-qa="message"]').type("Test Test");
-    cy.get('[data-qa="submit-button"]').click();
+    homePage.productClick();
+    // Product details - Quantity 30 / add cart
+    productDetails.elements.quantityBox().clear().type("30");
+    productDetails.btnAddCardClick();
+    productDetails.btnWinAddedClick();
+    //  Cart & cart summary - Proceed to Checkout
+    cartCartSummary.btnProceedCheckoutClick();
+    cartCartSummary.btnWinRegisterLogClick();
+    // Account creation & sign in
+    accountCreationSingIn.signupNameType(tests.name);
+    accountCreationSingIn.elements.signupEmail().type(uniqueEmail);
+    accountCreationSingIn.btnSignupClick();
+    accountCreationSingIn.btnIdGenderSelect();
+    accountCreationSingIn.signuPasswordType(tests.password);
+    accountCreationSingIn.signupDaysType(tests.days);
+    accountCreationSingIn.signupMonthsType(tests.months);
+    accountCreationSingIn.signupYearsType(tests.year);
+    // Address
+    address.addNameType(tests.name);
+    address.addLastType(tests.lastname);
+    address.addAddressType("La calle 123");
+    address.addCountryType("Canada");
+    address.addStateType("Cba");
+    address.addCityType("Cordoba");
+    address.addZipType("5000");
+    address.addMobileType("123456789");
+    address.btnCreateAccountClick();
+
+    // Account creation
+    accountCreationSingIn.btnContinueClick();
+
+    // Home screen - Cart in the header
+    homePage.btnCartHeaderClick();
+
+    //  Cart & cart summary
+    cartCartSummary.btnProceedCheckoutClick();
+    cartCartSummary.btnPlaceOrderClick();
+    // Payment
+    payment.cardNameType(tests.fullname);
+    payment.cardNumberType(tests.creditcarnumber);
+    payment.cardCVCType("123");
+    payment.cardMonthType("02");
+    payment.cardYearType("2026");
+    payment.btnCardClick();
+    // Order confirmation
+    orderConfirmation.elements
+      .orderPlaced()
+      .should("contain", tests.correctOrder);
+    orderConfirmation.btnContinueClick();
+
+    // Home screen -  “Logout” on top header
+    homePage.btnLogoutHeaderClick();
+    // Account creation - sign in
+    accountCreationSingIn.loginEmailType(uniqueEmail);
+    accountCreationSingIn.loginPasswordType("123456");
+    accountCreationSingIn.btnLoginClick();
+    // Home screen - Contact Us
+    homePage.btnContactusHeaderClick();
+    // Contact form
+    contactus.contactNameType("Santiago A");
+    contactus.contactEmailType(uniqueEmail);
+    contactus.contactsubjectType("Test");
+    contactus.contactMessageType("Test Test");
+    contactus.btnSubmitClick();
     cy.on("window:confirm", (str) => {
       expect(str).to.equal("Press OK to proceed!");
     });
-    cy.get(".nav > :nth-child(4) > a").click();
+    // Home screen -  “Logout” on top header
+    homePage.btnLogoutHeaderClick();
   });
 });
